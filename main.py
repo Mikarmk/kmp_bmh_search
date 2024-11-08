@@ -78,12 +78,16 @@ algorithm = st.selectbox("Выберите алгоритм:", ["Кнута-Мо
 
 # Выполнение поиска
 if st.button("Найти"):
-    start_time = time.time()
-    if algorithm == "Кнута-Морриса-Пратта":
-        positions = kmp_search(text, pattern)
+    # Проверка, что подстрока не пуста
+    if pattern.strip() == "":
+        st.warning("Пожалуйста, введите подстроку для поиска.")
     else:
-        positions = bmh_search(text, pattern)
-    end_time = time.time()
+        start_time = time.time()
+        if algorithm == "Кнута-Морриса-Пратта":
+            positions = kmp_search(text, pattern)
+        else:
+            positions = bmh_search(text, pattern)
+        end_time = time.time()
 
     # Вывод результатов
     st.write(f"Найдено вхождений: {len(positions)}")
